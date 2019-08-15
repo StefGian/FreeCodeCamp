@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Inkscape Documentation</title>
+</head>
+
+<body>
+
+  <nav id="navbar">
+    <header id="nav_header">Inkscape Documentation</header>
+    <ul>
+      <li><a class="nav-link" href="#Introduction">Introduction</a></li>
+      <li>
+        <a class="nav-link" href="#vector_graphics">What is “vector graphics”?</a>
+      </li>
+      <li>
+        <a class="nav-link" href="#svg">What is “Scalable Vector Graphics”?</a>
+      </li>
+      <li><a class="nav-link" href="#invariants">Inkscape Invariants</a></li>
+      <li><a class="nav-link" href="#svgVSplainSvg">Inkscape SVG vs. Plain SVG</a></li>
+      <li>
+        <a class="nav-link" href="#fonts">Installing fonts</a>
+      </li>
+      <li><a class="nav-link" href="#save">Emergency Save</a></li>
+      <li><a class="nav-link" href="#eps">How to open EPS files in Windows</a></li>
+      <li><a class="nav-link" href="#Reference">Reference</a></li>
+    </ul>
+  </nav>
+  <main id="main-doc">
+    <section class="main-section" id="Introduction">
+      <header>Introduction</header>
+      <article>
+        <p>
+          Whether you are an illustrator, designer, web designer or just someone who needs to create some vector
+          imagery, Inkscape is for you!
+        </p>
+        <ul>
+          <li>
+            Flexible drawing tools
+          </li>
+          <li>
+            Broad file format compatibility
+          </li>
+          <li>
+            Powerful text tool
+          </li>
+          <li>
+            Bezier and spiro curves
+          </li>
+        </ul>
+      </article>
+    </section>
+    <section class="main-section" id="vector_graphics">
+      <header>What is “vector graphics”?</header>
+      <article>
+        <p>
+          In contrast to raster (“bitmap”) graphics editors such as Photoshop or GIMP, Inkscape stores its graphics in a
+          vector format. Vector graphics is a resolution-independent description of the actual shapes and objects that
+          you see in the image. A rasterization engine uses this information to determine how to plot each line and
+          curve at any resolution or zoom level.
+        </p>
+        <p>
+          Contrast that to raster ("bitmap") graphics, which is always bound to a specific resolution, and stores an
+          image as a grid of pixels.
+
+          Vector graphics are a complement, rather than an alternative, to raster graphics. Each has its own purpose and
+          is useful for different kinds of things. Raster graphics tend to be better for photographs and some kinds of
+          artistic drawings, while vectors are more suitable for design compositions, logos, images with text, technical
+          illustrations, etc.
+        </p>
+        <p>
+          Note that Inkscape can import and display raster images, too. An imported raster images becomes yet another
+          object in your vector graphics, and you can do with it everything you can do to other kinds of objects (move,
+          transform, clip, etc.).
+        </p>
+      </article>
+    </section>
+    <section class="main-section" id="svg">
+      <header>What is “Scalable Vector Graphics”? </header>
+      <article>
+        <p>
+          Scalable Vector Graphics (SVG) is an open, industry-standard XML-based format for vector graphics developed by
+          the W3C. Its acceptance has grown fast! Most, if not all, vector editors can import and export SVG, and all
+          modern browsers (including IE, starting with IE9) can display it directly, i.e. without requiring any plugins.
+          For more information, see About SVG below.
+        </p>
+      </article>
+    </section>
+    <section class="main-section" id="invariants">
+      <header>Inkscape Invariants</header>
+      <article>
+        <p>These are the founding goals for Inkscape that we'll be adhering to in this project: </p>
+
+        <ul>
+          <li>
+            Full SVG (plus XML, CSS2) compliance
+          </li>
+          <li>
+            Core written in C/C++
+          </li>
+          <li>
+            Gtk-based user interface following the standards set out in the GNOME Human Interface Guidelines (HIG)
+          </li>
+          <li>
+            Emphasis on a small core and extensibility. Extensions should be first-class citizens, so we can say "no" to
+            features in the core without guilt.
+          </li>
+          <li>
+            Open, community-oriented development processes
+          </li>
+          <li>
+            Baseline is the Sodipodi Hydra codebase
+          </li>
+          <li>
+            Where a better solution cannot be found, default to the way Illustrator does it.
+          </li>
+        </ul>
+      </article>
+    </section>
+    <section class="main-section" id="svgVSplainSvg">
+      <header>Inkscape SVG vs. Plain SVG</header>
+      <article>
+        <p>
+          Inkscape's default mode when saving
+          conforms to the SVG standard which permits extensions like those outlined here
+          Inkscape SVG should render identically with or without the Inkscape extensions
+          gives Inkscape hints how to treat things in the UI -- for example, whether to treat a given group as a layer,
+          or whether path nodes are cusp/flat/whatever
+          seems to have a smaller filesize vs "PlainSVG" for some odd reason.
+        </p>
+        <p>
+          "Saving document as 'plain SVG' actually invokes exporter. All objects will be reconstructed from parsed data,
+          but overall object hierarchy will be preserved." -- quote from the documentation.
+        </p>
+        <p>
+          From one perspective, Inkscape SVG is basically the same as plain SVG, just with a few extra commands (in
+          separate namespaces) added, which the Inkscape tools use to keep track of their work
+          if you edit an inkscape SVG in any other SVG editor, then it should appear as any other plain SVG, if not,
+          then you can safely remove all references to inkscape: or sodipodi:, and just be left with the plain SVG
+          however, if you then re-edit the SVG in Inkscape (after hand editing, for example) 'without' removing the
+          references to inkscape in the object that has been edited (for an example if you edit a path created using the
+          inkscape star tool), then inkscape will re-generate the SVG path d="" attributes using the information that
+          'it' has stored under its namespace, and therefore getting rid of any editing to the path of that you, the
+          user have done.
+        </p>
+      </article>
+    </section>
+    <section class="main-section" id="fonts">
+      <header>Installing fonts</header>
+      <article>
+        <p>
+          Inkscape does not require (or offer) any specific way of installing fonts. Essentially, one has to download
+          whatever fonts one would like and place them in the default font directory. Many Linux distributions and other
+          operating systems will allow to install a font by double-clicking on the file, which will then install/copy
+          the font into the correct directory for you.
+
+          If your operating system does not offer this comfortable way of installing fonts, these hints may help you:
+        </p>
+        <ul>
+          <li>
+            On Linux, fonts can be made available systemwide, to be accessible to core GUI resources such as KDE or
+            GNOME. More commonly, users only install fonts so they can be used by product-making applications including
+            Inkscape and OpenOffice.org.
+          </li>
+          <li>
+            Truetype fonts are installed by placement of the files into the /usr/share/fonts/ttf directory (or
+            C:\WINDOWS\FONTS for Windows types).<code>- mv ~/downloads/*.ttf /usr/share/fonts/ttf</code>
+          </li>
+          <li>
+            It is advisable that the font cache file be deleted in the process. This file is fonts.cache-1, located in
+            /usr/share/fonts (or C:\WINDOWS\FONTS for Windows types). After font files have been transferred to the
+            default font directory, delete this fonts.cache-1 file and the .fonts.cache-1 file in your home directory
+            (or "My Documents" directory for Windows types).
+            <code>- rm -f /usr/share/fonts/*fonts.cache-1</code>
+            <code>- rm -f ~/*fonts.cache-1</code>
+          </li>
+        </ul>
+        <p>
+          Once done doing this, you need to rebuild your font cache files (only if you are using Linux or some other OS
+          for which font caches are used) so other programs can effectively use the fonts. Do this by going to your
+          default font directory (/usr/share/fonts) and typing as root:
+        </p>
+        <code>- fc-cache</code>
+      </article>
+    </section>
+    <section class="main-section" id="save">
+      <header>Emergency Save</header>
+      <p>
+        When Inkscape crashes, it tries to save the document as a backup with following name:
+      </p>
+      <code>
+        <filename>.<datetime>.#
+      </code>
+      <p>
+        If the document has not been saved yet, the name is:
+      </p>
+      <code>inkscape-emergency.<datetime>.#</code>
+      <p>
+        Note, that there is no .svg file name ending.
+      </p>
+      <h4>On Unix (Linux, Mac OS X, *BSD, etc.)</h4>
+      <p>
+        Inkscape tries to save in the following paths:
+      </p>
+      <ol>
+        <li>
+          Home directory<code>(~/, $HOME, /home/<username>/)</code>
+        </li>
+        <li>
+          <code>/tmp/</code>
+        </li>
+        <li>
+          In the current working directory
+        </li>
+      </ol>
+      <h4>On Windows</h4>
+      <p>
+        Inkscape tries to save in %UserProfile%:
+      </p>
+      <ol>
+        <li>
+          XP/2003: <code>C:\Documents and Settings\<username>\</code>
+        </li>
+        <li>
+          Vista/7: <code>C:\Users\<username>\</code>
+        </li>
+      </ol>
+    </section>
+    <section class="main-section" id="eps">
+      <header>How to open EPS files in Windows</header>
+      <p>
+        Initially you need to find out where ps2pdf is on your machine or install it. It's in the Ghostscript lib
+        directory, which is probably something like :
+      </p>
+      <code>C:\Program Files\gs\gs9.09\lib</code>
+      <p>
+        If it is not installed you may find a current release of Ghostscript for Windows on their download page here.
+
+        Then you need to add this to the system Path in Environment Variables:
+      </p>
+      <ul>
+        <li>
+          In Win XP, Vista or 7, navigate to the Start button > Control Panel > System > Advanced > Environment
+          Variables. Scroll through the System variables in the bottom panel, and select Path, click Edit. In the
+          ridiculously small edit box provided, add a semicolon to the end of whatever is there at the moment, and then
+          add <code>C:\Program Files\gs\gs9.16\lib</code> (or whatever it is on your machine). Note — There should be no
+          space between the semicolon and C (the start of the path). You will also need to add the Ghostscript bin
+          directory after another semicolon to the system Path. (This will be the same as the lib directory, but ending
+          in bin rather than lib — for example: <code>C:\Program Files\gs\gs9.16\bin</code>)
+        </li>
+        <li>
+          In Windows 8.1/10, right-click on This PC, choose Properties > Advanced system settings > Advanced tab >
+          Environment Variables. Scroll through the System variables in the bottom panel, and select Path, click Edit.
+          This produces a list of existing paths. Click the "New" button, and you'll see a place at the bottom of the
+          list to add your path.
+          Add <code>C:\Program Files\gs\gs9.16\lib </code> (or whatever it is on your machine) to the list.
+          You will also need to add the Ghostscript bin directory, which will be the same as the lib directory, but
+          ending in bin rather than lib — for example: <code> C:\Program Files\gs\gs9.16\bin</code>. In Windows 10, for
+          some reason, Inkscape sometimes doesn't like the paths at the bottom of the list. Near the "New" button are
+          "Move Up" and "Move Down" buttons. So if you still can't open EPS files after installing Ghostscript, you can
+          try moving the 2 paths up in the list. Try moving them up halfway or more.
+        </li>
+      </ul>
+      <p>
+        Note that updating to a new version of Ghostscript will install to a new \gs directory, but will not erase the
+        old version subdirectory or update the Environment Variables. You'll need to delete the old directories and
+        adjust the Environment Variable paths if you want to make use of the newly installed version (with the new
+        directory and paths).
+      </p>
+    </section>
+
+
+    <section class="main-section" id="Reference">
+      <header>Reference</header>
+      <article>
+        <ul>
+          <li>
+            All the documentation in this page is taken from
+            <a href="http://wiki.inkscape.org/wiki/index.php/Inkscape" target="_blank">Wiki</a>
+          </li>
+          <li>
+            And From
+            <a href="https://inkscape.org/learn/faq/#what-does-inkscape-mean" target="_blank">Inkscape</a>
+          </li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</body>
+
+</html>
